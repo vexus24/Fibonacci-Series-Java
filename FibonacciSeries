@@ -1,0 +1,53 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+
+/**
+ * Created by Ed on 29/05/2015.
+ */
+ 
+public class FibonacciSeries {
+
+   public static int fibonacciLoop (int n) {
+       int fibonacci = 1;
+       int fibo1=1;
+       int fibo2=1;
+
+
+       if (n == 1 || n == 2) {
+           return 1;
+       }
+
+       for (int i =3; i <= n ; i ++) {
+           fibonacci= fibo1 + fibo2;
+           fibo1 = fibo2;
+           fibo2 = fibonacci;
+
+       }
+       return fibonacci;
+    }
+
+
+    public static void main(String[] args) {
+
+        try {
+            File file = new File(args[0]);
+            BufferedReader in = new BufferedReader(new FileReader(file));
+            String line;
+            while ((line = in.readLine()) != null) {
+                String[] lineArray = line.split("\\s");
+                if (lineArray.length > 0) {
+
+                    for (int n =0; n < lineArray.length; n ++) {
+                        String a = lineArray[n];
+                        int A = Integer.parseInt(a);
+                        System.out.println(fibonacciLoop(A));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("File Read Error: " + e.getMessage());
+        }
+    }
+}
